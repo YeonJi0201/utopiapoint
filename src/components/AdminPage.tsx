@@ -21,8 +21,11 @@ import { magicAudio } from '../utils/audio';
 import { exportDataAsJSON } from '../utils/storage';
 import * as backend from '../lib/backend';
 import logoImg from '../assets/hall/logo.webp';
+import { CharacterPicker } from './CharacterPicker';
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+/** the grades a character can be given */
+const GRADES = [1, 4, 7] as const;
 const pad2 = (n: number) => String(n).padStart(2, '0');
 
 /** yyyy-MM-ddTHH:mm:ss in this browser's local time, for <input type="datetime-local"> */
@@ -135,7 +138,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({
   // New Award Form State
   const [targetHouse, setTargetHouse] = useState<HouseId>('gryffindor');
   const [characterName, setCharacterName] = useState('');
-  const [characterGrade, setCharacterGrade] = useState<number>(3);
+  const [characterGrade, setCharacterGrade] = useState<number>(GRADES[0]);
   const [activity, setActivity] = useState('');
   const [points, setPoints] = useState<number>(10);
   const [category, setCategory] = useState<PointCategory>('class');
@@ -619,34 +622,42 @@ export const AdminPage: React.FC<AdminPageProps> = ({
                 {/* 2. Character Name & Grade */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
-                      캐릭터(자캐) 이름 *
-                    </label>
-                    <input
-                      type="text"
+                    <CharacterPicker
                       value={characterName}
-                      onChange={(e) => setCharacterName(e.target.value)}
-                      placeholder="예: 아르테미스 블랙우드, 루카스 에반스"
-                      className="w-full px-3.5 py-2 text-xs bg-neutral-900 border border-neutral-700 rounded-md text-neutral-100 placeholder-neutral-500 focus:outline-hidden focus:border-amber-500"
-                      required
+                      onChange={setCharacterName}
+                      onPick={(c) => {
+                        // the archive knows the character's house and year
+                        if (c.house) setTargetHouse(c.house);
+                        if (c.year && (GRADES as readonly number[]).includes(c.year)) setCharacterGrade(c.year);
+                        magicAudio.playGemClink();
+                      }}
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-neutral-300 mb-1.5">
-                      학년 (1~7학년)
-                    </label>
-                    <select
-                      value={characterGrade}
-                      onChange={(e) => setCharacterGrade(parseInt(e.target.value, 10))}
-                      className="w-full px-3.5 py-2 text-xs bg-neutral-900 border border-neutral-700 rounded-md text-neutral-100 focus:outline-hidden focus:border-amber-500"
-                    >
-                      {[1, 2, 3, 4, 5, 6, 7].map((num) => (
-                        <option key={num} value={num}>
+                  <div role="group" aria-labelledby="grade-label">
+                    <span id="grade-label" className="block text-xs font-semibold text-neutral-300 mb-1.5">
+                      학년
+                    </span>
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {GRADES.map((num) => (
+                        <button
+                          key={num}
+                          type="button"
+                          aria-pressed={characterGrade === num}
+                          onClick={() => {
+                            setCharacterGrade(num);
+                            magicAudio.playGemClink();
+                          }}
+                          className={`py-2 text-xs font-semibold rounded-md border transition-colors ${
+                            characterGrade === num
+                              ? 'bg-amber-950/80 text-amber-300 border-amber-600'
+                              : 'bg-neutral-900 text-neutral-300 border-neutral-700 hover:border-amber-600/50'
+                          }`}
+                        >
                           {num}학년
-                        </option>
+                        </button>
                       ))}
-                    </select>
+                    </div>
                   </div>
                 </div>
 
