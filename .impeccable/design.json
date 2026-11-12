@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T15:38:00+09:00",
+  "title": "Design System: Hogwarts House Cup",
+  "extensions": {
+    "colorMeta": {
+      "hall-ink": {
+        "role": "neutral",
+        "displayName": "Hall Ink",
+        "canonical": "#171717",
+        "tonalRamp": ["#101010", "#171717", "#252525", "#373737", "#505050", "#707070", "#999999", "#d0d0d0"]
+      },
+      "hall-stone": {
+        "role": "neutral",
+        "displayName": "Hall Stone",
+        "canonical": "#201d1b",
+        "tonalRamp": ["#121110", "#201d1b", "#302c29", "#443e3a", "#5c5550", "#786f69", "#9d928a", "#d0c6bd"]
+      },
+      "hall-panel": {
+        "role": "neutral",
+        "displayName": "Smoked Panel",
+        "canonical": "#1a1d1e",
+        "tonalRamp": ["#101213", "#1a1d1e", "#292d2e", "#3b4142", "#535a5b", "#717879", "#979e9f", "#cbd1d2"]
+      },
+      "antique-brass": {
+        "role": "primary",
+        "displayName": "Antique Brass",
+        "canonical": "#b99970",
+        "tonalRamp": ["#261e14", "#413321", "#5d4930", "#7c6240", "#9b7c55", "#b99970", "#d0b38e", "#e7d5bb"]
+      },
+      "brass-light": {
+        "role": "primary",
+        "displayName": "Light Brass",
+        "canonical": "#d3b58c",
+        "tonalRamp": ["#302516", "#4b3a24", "#695335", "#8a6e49", "#ad8e63", "#d3b58c", "#e2cdae", "#f0e5d4"]
+      },
+      "parchment": {
+        "role": "neutral",
+        "displayName": "Parchment",
+        "canonical": "#e7dccb",
+        "tonalRamp": ["#30271b", "#4d3e2d", "#6e5c46", "#927e66", "#b5a58e", "#d0c4b2", "#e7dccb", "#f5f0e8"]
+      },
+      "muted-parchment": {
+        "role": "neutral",
+        "displayName": "Muted Parchment",
+        "canonical": "#b7a990",
+        "tonalRamp": ["#29231a", "#443a2b", "#615440", "#806f55", "#9c896d", "#b7a990", "#d0c5b2", "#e9e3d8"]
+      },
+      "gryffindor-cloth": {
+        "role": "tertiary",
+        "displayName": "Gryffindor Cloth",
+        "canonical": "#290c12",
+        "tonalRamp": ["#120609", "#290c12", "#41151e", "#5b202b", "#783541", "#96515c", "#b47b82", "#dbc2c4"]
+      },
+      "slytherin-cloth": {
+        "role": "secondary",
+        "displayName": "Slytherin Cloth",
+        "canonical": "#1d2320",
+        "tonalRamp": ["#101311", "#1d2320", "#2d3631", "#414c45", "#59665e", "#74827a", "#99a49d", "#cbd1cd"]
+      },
+      "ravenclaw-cloth": {
+        "role": "secondary",
+        "displayName": "Ravenclaw Cloth",
+        "canonical": "#242933",
+        "tonalRamp": ["#12151b", "#242933", "#343b49", "#495264", "#626d80", "#7f8a9b", "#a4adb8", "#d0d4da"]
+      },
+      "hufflepuff-cloth": {
+        "role": "tertiary",
+        "displayName": "Hufflepuff Cloth",
+        "canonical": "#523c24",
+        "tonalRamp": ["#20170e", "#382918", "#523c24", "#705432", "#8f6e45", "#ae8d63", "#cbb08d", "#e3d4c0"]
+      },
+      "positive-change": {
+        "role": "secondary",
+        "displayName": "Positive Change",
+        "canonical": "#7f9a70",
+        "tonalRamp": ["#1d2619", "#33442b", "#4b6240", "#668456", "#7f9a70", "#a0b393", "#bfccb7", "#e1e8dc"]
+      },
+      "negative-change": {
+        "role": "tertiary",
+        "displayName": "Negative Change",
+        "canonical": "#a46151",
+        "tonalRamp": ["#29150f", "#45241b", "#63362a", "#824b3a", "#a46151", "#bf8475", "#d5aa9f", "#ead2cc"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Hall Display",
+        "purpose": "Short English hero titles."
+      },
+      "title": {
+        "displayName": "Panel Title",
+        "purpose": "Section and panel headings."
+      },
+      "body": {
+        "displayName": "Korean Body",
+        "purpose": "Readable Korean explanations and supporting copy."
+      },
+      "label": {
+        "displayName": "Small Label",
+        "purpose": "Navigation, compact metadata, and uppercase English labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-separation",
+        "value": "0 8px 22px rgba(0, 0, 0, 0.16)",
+        "purpose": "Use sparingly to separate one dark panel from the hall backdrop."
+      }
+    ],
+    "motion": [
+      {
+        "name": "quiet-state",
+        "value": "180ms ease-out",
+        "purpose": "Subtle hover and focus color changes; avoid decorative movement."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      },
+      {
+        "name": "compact",
+        "value": "420px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Active Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "A compact serif navigation link with a fine brass active rule.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#home\" aria-current=\"page\">House Status</a></nav>",
+      "css": ".ds-nav a { position: relative; display: inline-flex; padding: 8px 12px; color: #b7a990; font: 400 12px/1.4 Cinzel, Georgia, serif; text-decoration: none; } .ds-nav a[aria-current=\"page\"] { color: #d3b58c; } .ds-nav a[aria-current=\"page\"]::after { position: absolute; right: 12px; bottom: 0; left: 12px; height: 1px; background: #b99970; content: \"\"; } .ds-nav a:hover { color: #e7dccb; } .ds-nav a:focus-visible { outline: 2px solid #d3b58c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outlined Brass Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A restrained action control; decoration never obscures its label.",
+      "html": "<button class=\"ds-button-outline\" type=\"button\">View the Hall</button>",
+      "css": ".ds-button-outline { min-height: 36px; padding: 8px 20px; border: 1px solid rgba(185, 153, 112, 0.72); border-radius: 0; background: rgba(20, 20, 20, 0.72); color: #d3b58c; font: 400 12px/1.4 Noto Serif KR, Georgia, serif; cursor: pointer; transition: color 180ms ease-out, border-color 180ms ease-out, background-color 180ms ease-out; } .ds-button-outline:hover { border-color: #d3b58c; background: rgba(185, 153, 112, 0.08); color: #e7dccb; } .ds-button-outline:focus-visible { outline: 2px solid #d3b58c; outline-offset: 3px; } .ds-button-outline:active { background: rgba(185, 153, 112, 0.14); }"
+    },
+    {
+      "name": "Current Ranking Panel",
+      "kind": "card",
+      "refersTo": "ranking-panel",
+      "description": "A compact four-row comparison panel with aligned rank, name, score, and change.",
+      "html": "<section class=\"ds-ranking\" aria-label=\"Current ranking\"><h2>Current Ranking</h2><ol><li><span>1</span><strong>Gryffindor</strong><b>7,420 pts</b><em>+120</em></li><li><span>2</span><strong>Slytherin</strong><b>7,380 pts</b><em>-40</em></li></ol></section>",
+      "css": ".ds-ranking { padding: 20px 24px; border: 1px solid rgba(185, 153, 112, 0.68); border-radius: 2px; background: rgba(20, 20, 20, 0.9); color: #e7dccb; } .ds-ranking h2 { margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(185, 153, 112, 0.32); color: #d3b58c; font: 400 12px/1.4 Cinzel, Georgia, serif; letter-spacing: 0.06em; text-transform: uppercase; } .ds-ranking ol { margin: 0; padding: 0; list-style: none; } .ds-ranking li { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto 34px; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(185, 153, 112, 0.16); font: 400 13px/1.4 Noto Serif KR, Georgia, serif; } .ds-ranking li:last-child { border-bottom: 0; } .ds-ranking li span { color: #b7a990; } .ds-ranking li strong, .ds-ranking li b { color: #e7dccb; font-weight: 400; } .ds-ranking li em { color: #7f9a70; font-size: 10px; font-style: normal; text-align: right; } .ds-ranking li:nth-child(2) em { color: #a46151; }"
+    },
+    {
+      "name": "House Banner",
+      "kind": "custom",
+      "refersTo": "house-banner",
+      "description": "A house-colored hanging pennant that gives crest, name, score, and change a shared center line.",
+      "html": "<article class=\"ds-banner ds-banner--gryffindor\"><svg class=\"ds-banner__crest\" viewBox=\"0 0 64 72\" aria-hidden=\"true\"><path d=\"M8 8h48v30c0 12-10 21-24 28C18 59 8 50 8 38V8Z\" /></svg><h2>Gryffindor</h2><p>7,420 <small>pts</small></p><span class=\"ds-banner__change\">+120</span></article>",
+      "css": ".ds-banner { display: grid; justify-items: center; align-content: start; gap: 10px; width: min(100%, 190px); min-height: 250px; padding: 22px 14px 30px; border: 1px solid rgba(185, 153, 112, 0.62); color: #e7dccb; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%); } .ds-banner--gryffindor { background: linear-gradient(180deg, rgba(41, 12, 18, 0.96), rgba(31, 12, 15, 0.98)); } .ds-banner__crest { width: 72px; height: 82px; margin: 8px 0 2px; fill: none; stroke: rgba(211, 181, 140, 0.78); stroke-width: 1.2; } .ds-banner h2 { margin: 0; color: #d3b58c; font: 400 15px/1.3 Cinzel, Georgia, serif; text-transform: uppercase; } .ds-banner p { margin: 0; color: #e7dccb; font: 400 24px/1.2 Cinzel, Georgia, serif; } .ds-banner p small { color: #b7a990; font-size: 11px; } .ds-banner__change { color: #7f9a70; font: 400 11px/1.4 Noto Serif KR, Georgia, serif; } .ds-banner:focus-visible { outline: 2px solid #d3b58c; outline-offset: 4px; }"
+    },
+    {
+      "name": "Statistics Strip",
+      "kind": "custom",
+      "refersTo": "stats-strip",
+      "description": "A shared horizontal band for event status and key metrics, divided by fine brass rules.",
+      "html": "<section class=\"ds-stats\" aria-label=\"House Cup statistics\"><div><span>Event ends in</span><strong>23 days</strong></div><div><span>Participants</span><strong>1,240</strong></div><div><span>Points this week</span><strong>12,540 pts</strong></div></section>",
+      "css": ".ds-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(185, 153, 112, 0.54); border-bottom: 1px solid rgba(185, 153, 112, 0.54); background: rgba(20, 20, 20, 0.82); color: #e7dccb; } .ds-stats > div { display: grid; align-content: center; gap: 5px; min-height: 68px; padding: 10px 24px; border-right: 1px solid rgba(185, 153, 112, 0.24); } .ds-stats > div:last-child { border-right: 0; } .ds-stats span { color: #b7a990; font: 400 10px/1.4 Noto Serif KR, Georgia, serif; } .ds-stats strong { color: #d3b58c; font: 400 16px/1.3 Cinzel, Noto Serif KR, Georgia, serif; } @media (max-width: 640px) { .ds-stats { grid-template-columns: 1fr; } .ds-stats > div { min-height: 52px; border-right: 0; border-bottom: 1px solid rgba(185, 153, 112, 0.24); } .ds-stats > div:last-child { border-bottom: 0; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "촛불 아래 대연회장",
+    "overview": "이 시스템은 사용자가 제공한 대연회장 레퍼런스를 시각적 기준으로 삼는다. 그을린 석재와 촛불의 온기, 낡은 황동의 절제된 장식이 분위기를 만든다. 화면은 어둡고 깊이 있지만 정보는 선명해야 한다. 장식은 점수와 순위를 읽는 일을 돕는 범위에서만 사용한다.\n\n넓은 화면에서는 가는 상단 내비게이션, 좌측의 제목과 우측의 현재 순위, 중앙의 네 기숙사 배너, 하단의 가로 통계 띠가 한 무대처럼 이어진다. 다음 화면에도 이 세계의 색, 타이포그래피, 선의 무게, 여백 리듬을 적용하되, 원본 현황 화면의 영웅 영역과 배너 배열을 모든 페이지에 억지로 복제하지 않는다. 각 화면의 실제 작업에 맞게 구성하고 시각 언어만 계승한다.",
+    "keyCharacteristics": [
+      "차콜과 짙은 브라운의 배경 위에 앤틱 브라스 선과 따뜻한 종이색 텍스트",
+      "네 기숙사 색은 서로 구별되지만 배경보다 튀지 않도록 낮은 명도와 채도를 유지",
+      "영문 세리프 디스플레이와 읽기 쉬운 한국어 세리프 본문",
+      "장식용 프레임은 가늘게, 핵심 점수와 상태는 명확하게",
+      "밀도 있는 대시보드에서도 큰 여백과 수평 정렬로 시선의 흐름을 유지"
+    ],
+    "rules": [
+      {
+        "name": "The Brass-Rarity Rule",
+        "body": "브라스는 전체 화면의 소량만 차지한다. 얇은 선과 실제로 선택된 상태에 쓰고, 큰 금색 면이나 상시 발광 효과로 확장하지 않는다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Voice Rule",
+        "body": "Cinzel의 장식적 인상은 짧은 제목과 라벨에 한정한다. 긴 한국어 문장에 과도한 자간이나 작은 크기를 적용하지 않는다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet-Depth Rule",
+        "body": "표면의 계층은 배경 명도와 가는 선으로 먼저 만든다. 강한 드롭 섀도, 금색 글로우, 블러를 겹쳐 사용하지 않는다.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do: 다음 화면에도 차콜·브라스·파치먼트의 비율과 기숙사별 저채도 색 구분을 이어간다.",
+      "Do: 중요한 점수는 단위와 증감 방향이 함께 보이도록 표현한다.",
+      "Do: 이미지의 비례를 기준으로 넓은 화면의 좌우 여백, 상단 정보 영역, 배너와 통계의 수평 정렬을 유지한다.",
+      "Do: 장식적 영문 제목과 읽기 쉬운 한국어 설명의 역할을 분리한다.",
+      "Do: 예시 데이터는 예시임을 유지하고, 레퍼런스 이미지의 숫자를 실제 점수 데이터로 가져오지 않는다.",
+      "Do: 모든 조작 요소에 키보드 포커스와 충분한 대비를 제공한다."
+    ],
+    "donts": [
+      "Don't: 작은 컴포넌트마다 금색 테두리와 그림자를 모두 중첩하지 않는다.",
+      "Don't: 네 기숙사를 하나의 색으로 평탄화하거나, 기숙사별 색을 고채도 네온처럼 쓰지 않는다.",
+      "Don't: 첨부된 전체 화면 캡처를 다른 페이지의 배경으로 늘여 UI와 텍스트까지 재사용하지 않는다.",
+      "Don't: 확인되지 않은 점수, 순위 변동, 참가 인원을 레퍼런스 화면에서 복사하지 않는다.",
+      "Don't: 모든 페이지에 같은 히어로·깃발·통계 구조를 복제해 각 화면의 정보 목적을 흐리지 않는다."
+    ]
+  }
+}

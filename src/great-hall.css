@@ -1,0 +1,776 @@
+/* ==========================================================================
+   Great Hall — header + House Status
+   Mapped 1:1 from the 1672 × 941 reference. --u is one reference pixel
+   at the current width, so the composition holds at every desktop size.
+   ========================================================================== */
+
+:root {
+  --gh-brass: #b99970;
+  --gh-brass-line: rgba(185, 153, 112, 0.55);
+  --gh-paper: #ebe0cf;
+  --gh-up: #93a27f;
+  --gh-down: #c0503f;
+  --gh-serif-en: 'Cormorant Garamond', 'Noto Serif KR', Georgia, serif;
+  --gh-caps: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --gh-serif-ko: 'Noto Serif KR', Georgia, serif;
+}
+
+::selection {
+  background: rgba(185, 153, 112, 0.42);
+  color: #fff8ec;
+}
+
+/* ---------- Header ---------- */
+
+.gh-header {
+  container-type: inline-size;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(21, 19, 17, 0.97), rgba(24, 22, 20, 0.95));
+  color: var(--gh-paper);
+}
+
+.gh-header.is-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* the hall drifts beneath; this keeps the band steady */
+  background: linear-gradient(180deg, rgba(22, 21, 20, 0.9), rgba(25, 25, 24, 0.78));
+}
+
+.gh-bar {
+  --u: calc(100cqw / 1672);
+  position: relative;
+  height: calc(70 * var(--u));
+}
+
+/* bottom rule, broken around the crest */
+.gh-bar::before,
+.gh-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: var(--gh-brass-line);
+}
+.gh-bar::before { left: 0; width: calc(38 * var(--u)); }
+.gh-bar::after { left: calc(128 * var(--u)); right: 0; }
+
+.gh-brand {
+  position: absolute;
+  left: calc(40 * var(--u));
+  top: 0;
+  height: calc(84 * var(--u));
+  display: flex;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.gh-logo {
+  width: calc(82 * var(--u));
+  height: calc(84 * var(--u));
+  display: block;
+}
+
+.gh-wordmark {
+  position: absolute;
+  left: calc(106 * var(--u));
+  top: calc(27 * var(--u));
+  font-family: var(--gh-serif-en);
+  font-weight: 500;
+  font-size: calc(23.5 * var(--u));
+  line-height: 1;
+  letter-spacing: 0.005em;
+  color: #dccdb2;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.gh-brand:hover .gh-wordmark { color: #f1e4cb; }
+
+.gh-nav-item {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: calc(150 * var(--u));
+  transform: translateX(-50%);
+  padding-top: calc(4 * var(--u));
+  font-family: var(--gh-serif-ko);
+  font-size: max(12px, calc(15 * var(--u)));
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #b2a794;
+  transition: color 0.2s ease;
+}
+.gh-nav-item:hover { color: #ddd0bb; }
+.gh-nav-item[aria-current="page"] { color: #ece0cb; font-weight: 500; }
+.gh-nav-0 { left: calc(590.5 * var(--u)); }
+.gh-nav-1 { left: calc(756 * var(--u)); }
+.gh-nav-2 { left: calc(922.5 * var(--u)); }
+.gh-nav-3 { left: calc(1080.5 * var(--u)); }
+.gh-nav-short { display: none; }
+
+.gh-sep {
+  position: absolute;
+  top: calc(29 * var(--u));
+  width: 1px;
+  height: calc(13 * var(--u));
+  background: rgba(185, 153, 112, 0.35);
+}
+.gh-sep-1 { left: calc(669 * var(--u)); }
+.gh-sep-2 { left: calc(843 * var(--u)); }
+.gh-sep-3 { left: calc(1001 * var(--u)); }
+
+.gh-active-ornament {
+  position: absolute;
+  left: 50%;
+  top: calc(52 * var(--u));
+  width: calc(150 * var(--u));
+  height: calc(22 * var(--u));
+  transform: translateX(-50%);
+  overflow: visible;
+  fill: none;
+  stroke: var(--gh-brass);
+  stroke-width: 1;
+}
+.gh-active-ornament path { vector-effect: non-scaling-stroke; }
+.gh-active-ornament .gh-fill { fill: #d6bb8f; stroke: none; }
+
+.gh-icon {
+  position: absolute;
+  top: calc(23 * var(--u));
+  width: calc(30 * var(--u));
+  height: calc(30 * var(--u));
+  min-width: 28px;
+  min-height: 28px;
+  display: grid;
+  place-items: center;
+  color: #c9ae86;
+  transition: color 0.2s ease;
+}
+.gh-icon svg { width: 100%; height: 100%; }
+.gh-icon:hover { color: #ecd3ac; }
+.gh-icon-search { left: calc(1498 * var(--u)); }
+.gh-icon-user { left: calc(1584 * var(--u)); }
+.gh-icon-user,
+.gh-icon-user:hover { color: #c9ae86; } /* decorative: no hover, it isn't a button */
+.gh-icon-sep {
+  position: absolute;
+  left: calc(1556 * var(--u));
+  top: calc(27 * var(--u));
+  width: 1px;
+  height: calc(22 * var(--u));
+  background: rgba(185, 153, 112, 0.5);
+}
+
+.gh-header button:focus-visible {
+  outline: 1px solid #e4c49a;
+  outline-offset: 2px;
+}
+
+/* ---------- House Status stage ---------- */
+
+.ov-main { padding: 0; max-width: none; }
+
+.ov-stage {
+  --u: calc(100cqw / 1672);
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  background: #171411;
+  color: var(--gh-paper);
+}
+
+.ov-camera {
+  position: absolute;
+  inset: 0;
+}
+
+.ov-camera > * { position: absolute; }
+.ov-stage > * { position: absolute; }
+
+/* fixed rod + finials the banners hang from */
+.ov-rods {
+  left: calc(297 * var(--u));
+  top: calc(360 * var(--u));
+  width: calc(1084 * var(--u));
+  height: calc(98 * var(--u));
+  pointer-events: none;
+}
+
+.ov-plate {
+  inset: 0;
+  background: url('./assets/hall/hall-full.webp') 0 0 / 100% 100% no-repeat;
+}
+/* the same picture with depth; fades in over the still one once ready */
+.ov-depth {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.ov-depth.is-ready { opacity: 1; }
+
+/* daylight through the stained glass, breathing slowly */
+.ov-rays {
+  left: calc(700 * var(--u));
+  top: calc(90 * var(--u));
+  width: calc(320 * var(--u));
+  height: calc(640 * var(--u));
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.ov-rays span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(214, 224, 255, 0.34), rgba(214, 222, 250, 0.12) 45%, transparent 85%);
+  clip-path: polygon(38% 0, 60% 0, 82% 100%, 18% 100%);
+  filter: blur(calc(14 * var(--u)));
+  opacity: 0.35;
+  transform-origin: 50% 0;
+  animation: ov-ray 11s ease-in-out infinite;
+}
+.ov-rays span:nth-child(2) {
+  clip-path: polygon(44% 0, 52% 0, 70% 100%, 46% 100%);
+  animation-duration: 7.5s;
+  animation-delay: -3s;
+  rotate: 7deg;
+}
+.ov-rays span:nth-child(3) {
+  clip-path: polygon(48% 0, 56% 0, 40% 100%, 22% 100%);
+  animation-duration: 9.5s;
+  animation-delay: -6s;
+  rotate: -5deg;
+}
+@keyframes ov-ray {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.7; }
+}
+
+.ov-dust {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* intro */
+.ov-intro { left: calc(-100 * var(--u)); top: 0; width: 0; height: 0; }
+.ov-intro > * { position: absolute; margin: 0; }
+
+.ov-eyebrow {
+  left: calc(176 * var(--u));
+  top: calc(158 * var(--u));
+  font-family: var(--gh-caps);
+  font-weight: 400;
+  font-size: calc(17 * var(--u));
+  line-height: 1.2;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+  color: #cdb995;
+  white-space: nowrap;
+}
+
+.ov-title { left: calc(158 * var(--u)); top: calc(182 * var(--u)); width: calc(408 * var(--u)); }
+.ov-title img { display: block; width: 100%; height: auto; }
+
+.ov-intro .ov-divider {
+  left: calc(166 * var(--u));
+  top: calc(261 * var(--u));
+  width: calc(311 * var(--u));
+  gap: calc(8 * var(--u));
+}
+.ov-intro .ov-divider svg { width: calc(13 * var(--u)); height: calc(13 * var(--u)); }
+
+.ov-lede {
+  left: calc(168 * var(--u));
+  top: calc(289 * var(--u));
+  width: calc(300 * var(--u));
+  text-align: center;
+  font-family: var(--gh-serif-ko);
+  font-size: max(11px, calc(14.5 * var(--u)));
+  line-height: calc(26 * var(--u));
+  color: #ddd2c1;
+  white-space: nowrap;
+}
+
+.ov-guide-btn,
+.ov-stats-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(8 * var(--u));
+  font-family: var(--gh-serif-ko);
+  color: #e3d6c1;
+  background: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+.ov-guide-btn svg,
+.ov-stats-btn svg { width: 1.05em; height: 1.05em; }
+.ov-guide-btn:hover,
+.ov-stats-btn:hover { background-color: rgba(214, 187, 143, 0.08); color: #fff3df; }
+
+.ov-guide-btn,
+.ov-stats-btn {
+  border: calc(13 * var(--u)) solid transparent;
+  border-image: url('./assets/hall/frame-button.webp') 13 stretch;
+  background: rgba(16, 14, 12, 0.5) padding-box;
+}
+.ov-guide-btn {
+  left: calc(221 * var(--u));
+  top: calc(359 * var(--u));
+  width: calc(179 * var(--u));
+  height: calc(45 * var(--u));
+  font-size: max(11px, calc(13 * var(--u)));
+}
+
+/* ranking panel — the frame image carries the brass border and corner work */
+.ov-ranking {
+  --p: calc(100cqw / 403);
+  container-type: inline-size;
+  left: calc(1200 * var(--u));
+  top: calc(123 * var(--u));
+  width: calc(403 * var(--u));
+  aspect-ratio: 403 / 263;
+  /* brass frame over a smoked-glass fill; the hall moves behind it */
+  background:
+    url('./assets/hall/frame-panel.webp') 0 0 / 100% 100% no-repeat,
+    linear-gradient(rgba(14, 12, 11, 0.62), rgba(14, 12, 11, 0.62)) 50% 50% / calc(100% - 12 * var(--u)) calc(100% - 12 * var(--u)) no-repeat;
+}
+.ov-ranking > * { position: absolute; margin: 0; }
+
+.ov-ranking-star {
+  left: calc(33 * var(--p));
+  top: calc(26 * var(--p));
+  width: calc(21 * var(--p));
+  height: calc(21 * var(--p));
+  fill: #d8c29e;
+}
+.ov-ranking-rule {
+  left: calc(32 * var(--p));
+  top: calc(59 * var(--p));
+  width: calc(340 * var(--p));
+  height: 1px;
+  background: linear-gradient(90deg, rgba(185, 153, 112, 0.6), rgba(185, 153, 112, 0.35) 85%, rgba(185, 153, 112, 0.1));
+}
+
+.ov-ranking-title {
+  left: calc(65 * var(--p));
+  top: calc(27 * var(--p));
+  font-family: var(--gh-caps);
+  font-weight: 400;
+  font-size: calc(16.5 * var(--p));
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #d8c29e;
+}
+
+.ov-ranking-list {
+  left: calc(32 * var(--p));
+  top: calc(67 * var(--p));
+  width: calc(338 * var(--p));
+  list-style: none;
+  padding: 0;
+}
+
+.ov-rank-row {
+  position: relative;
+  height: calc(41.5 * var(--p));
+  font-family: var(--gh-serif-en);
+  color: var(--gh-paper);
+}
+.ov-rank-row + .ov-rank-row { border-top: 1px solid rgba(185, 153, 112, 0.16); }
+.ov-rank-row > * {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ov-rank-no {
+  left: 0;
+  width: calc(22 * var(--p));
+  text-align: center;
+  font-size: calc(24 * var(--p));
+  font-weight: 500;
+  font-variant-numeric: lining-nums;
+  color: #d6c8b0;
+}
+.ov-rank-crest { left: calc(38 * var(--p)); width: calc(36 * var(--p)); height: calc(36 * var(--p)); }
+.ov-rank-name { left: calc(88 * var(--p)); font-size: calc(17.5 * var(--p)); font-weight: 500; color: #e6dac6; }
+.ov-rank-score {
+  right: calc(45 * var(--p));
+  font-size: calc(17 * var(--p));
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: #e3d7c3;
+}
+.ov-rank-score small { font-size: 0.9em; }
+.ov-rank-change {
+  left: calc(300 * var(--p));
+  display: inline-flex;
+  align-items: center;
+  gap: calc(4 * var(--p));
+  font-size: calc(11.5 * var(--p));
+  font-variant-numeric: lining-nums;
+  color: #c6b9a3;
+}
+.ov-rank-change .ov-tri { width: calc(7.5 * var(--p)); height: calc(7 * var(--p)); }
+.ov-rank-change.is-up .ov-tri { fill: var(--gh-up); }
+.ov-rank-change.is-down .ov-tri { fill: var(--gh-down); }
+.ov-rank-change.is-flat { left: calc(306 * var(--p)); letter-spacing: 0.15em; color: #a99c86; }
+
+/* banners — centred on the stage (span 325–1347, centre 836); the hall plate
+   was repainted behind them to match */
+.ov-banners { left: 0; top: 0; width: 0; height: 0; }
+.ov-banner-slot { position: absolute; top: calc(366 * var(--u)); width: calc(236 * var(--u)); }
+.ov-slot-gryffindor { left: calc(325 * var(--u)); }
+.ov-slot-slytherin { left: calc(585 * var(--u)); }
+.ov-slot-ravenclaw { left: calc(845 * var(--u)); }
+.ov-slot-hufflepuff { left: calc(1111 * var(--u)); }
+
+.ov-banner {
+  --b: calc(100cqw / 236);
+  container-type: inline-size;
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 236 / 354;
+  background: 0 0 / 100% 100% no-repeat;
+  color: var(--gh-paper);
+  transform-origin: 50% 18%;
+  animation: ov-sway 7s ease-in-out infinite alternate;
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ov-slot-slytherin .ov-banner { animation-duration: 8.2s; animation-delay: -2.4s; }
+.ov-slot-ravenclaw .ov-banner { animation-duration: 6.4s; animation-delay: -4.1s; }
+.ov-slot-hufflepuff .ov-banner { animation-duration: 7.7s; animation-delay: -1.3s; }
+@keyframes ov-sway {
+  from { rotate: -0.7deg; }
+  to { rotate: 0.7deg; }
+}
+.ov-banner:hover { filter: brightness(1.1) drop-shadow(0 14px 22px rgba(0, 0, 0, 0.5)); }
+.ov-banner > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ov-banner-name {
+  top: calc(193 * var(--b));
+  font-family: var(--gh-caps);
+  font-size: calc(21 * var(--b));
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #dcc49c;
+}
+.ov-banner[data-house="hufflepuff"] .ov-banner-name { color: #efdfc0; }
+
+.ov-banner-score {
+  top: calc(232 * var(--b));
+  font-family: var(--gh-serif-en);
+  font-size: calc(33 * var(--b));
+  font-weight: 400;
+  font-variant-numeric: lining-nums;
+  color: #e9dfcf;
+}
+.ov-banner-score small { font-size: 0.52em; }
+
+.ov-banner-change {
+  top: calc(285 * var(--b));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(5 * var(--b));
+  font-family: var(--gh-serif-en);
+  font-size: calc(17 * var(--b));
+  font-weight: 500;
+  font-variant-numeric: lining-nums;
+  color: #e8dcc8;
+}
+.ov-banner-change .ov-tri { width: calc(12 * var(--b)); height: calc(11 * var(--b)); }
+.ov-banner[data-house="gryffindor"] .ov-tri { fill: #c84a3c; }
+.ov-banner[data-house="slytherin"] .ov-tri { fill: #6f9a6c; }
+.ov-banner[data-house="ravenclaw"] .ov-tri { fill: #7395d1; }
+.ov-banner[data-house="hufflepuff"] .ov-tri { fill: #f2e6c9; }
+
+
+/* stats strip — a smoked band across the hall, its contents centred */
+.ov-band {
+  left: 0;
+  right: 0;
+  top: calc(751 * var(--u));
+  height: calc(105 * var(--u));
+  background: rgba(12, 11, 10, 0.5);
+  border-block: 1px solid rgba(185, 153, 112, 0.55);
+  -webkit-mask-image: linear-gradient(90deg, transparent 4%, #000 16%, #000 84%, transparent 96%);
+  mask-image: linear-gradient(90deg, transparent 4%, #000 16%, #000 84%, transparent 96%);
+  pointer-events: none;
+}
+.ov-band::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(-4 * var(--u));
+  width: calc(7 * var(--u));
+  height: calc(7 * var(--u));
+  background: #c9ad84;
+  transform: translateX(-50%) rotate(45deg);
+}
+.ov-stats {
+  left: 0;
+  right: 0;
+  top: calc(751 * var(--u));
+  height: calc(105 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ov-stats > * { position: relative; }
+.ov-stat {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: calc(22 * var(--u));
+  row-gap: calc(6 * var(--u));
+  align-items: center;
+  padding: 0 calc(44 * var(--u));
+  white-space: nowrap;
+}
+.ov-stat + .ov-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: calc(70 * var(--u));
+  width: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, transparent, rgba(185, 153, 112, 0.4), transparent);
+}
+.ov-stat-icon {
+  grid-row: 1 / 3;
+  width: calc(34 * var(--u));
+  height: calc(34 * var(--u));
+  color: #c8ab80;
+}
+.ov-stat-label {
+  font-family: var(--gh-serif-ko);
+  font-size: max(11px, calc(13 * var(--u)));
+  line-height: 1.25;
+  color: #b9ac96;
+}
+.ov-stat-value {
+  font-family: var(--gh-serif-ko);
+  font-size: max(13px, calc(19.5 * var(--u)));
+  font-weight: 400;
+  line-height: 1.2;
+  color: #ebe0cf;
+}
+.ov-stat-value small { font-family: var(--gh-serif-en); font-size: 0.95em; font-weight: 500; }
+/* fixed-width digits so the row doesn't twitch as the seconds tick */
+.ov-countdown { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.ov-stat:first-child { padding-left: 0; }
+.ov-stats-btn {
+  margin-left: calc(44 * var(--u));
+  width: calc(204 * var(--u));
+  height: calc(47 * var(--u));
+  font-size: max(11px, calc(14 * var(--u)));
+}
+
+.ov-scroll {
+  left: calc(786 * var(--u));
+  top: calc(872 * var(--u));
+  width: calc(100 * var(--u));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(9 * var(--u));
+  text-align: center;
+  font-family: var(--gh-caps);
+  font-size: max(9px, calc(10.5 * var(--u)));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b4a68f;
+  transition: color 0.2s ease;
+}
+.ov-scroll::before {
+  content: "";
+  width: calc(6 * var(--u));
+  height: calc(6 * var(--u));
+  border: 1px solid #b99970;
+  transform: rotate(45deg);
+}
+.ov-scroll::after {
+  content: "";
+  width: calc(16 * var(--u));
+  height: calc(16 * var(--u));
+  background: #c9ad84;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ov-scroll:hover { color: #e3d0ae; }
+.ov-scroll:hover::after { transform: translateY(3px); }
+
+.ov-stage button:focus-visible,
+.ov-stage a:focus-visible {
+  outline: 1px solid #e4c49a;
+  outline-offset: 3px;
+}
+
+.hall-sound-toggle { color: #b4a68f; transition: color 0.2s ease; }
+.hall-sound-toggle:hover { color: #e3d0ae; }
+
+/* ---------- Narrow screens: the stage becomes a flowing page ---------- */
+
+@media (max-width: 1099px) {
+  .gh-header,
+  .gh-header.is-overlay {
+    position: sticky;
+    background: linear-gradient(180deg, rgba(21, 19, 17, 0.97), rgba(24, 22, 20, 0.95));
+  }
+  .gh-bar {
+    height: auto;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "brand . actions" "nav nav nav";
+    align-items: center;
+    padding: 8px 16px 0;
+  }
+  .gh-bar::before { display: none; }
+  .gh-bar::after { left: 0; }
+  .gh-brand { position: static; grid-area: brand; height: auto; align-items: center; gap: 10px; }
+  .gh-logo { width: 40px; height: 41px; }
+  .gh-wordmark { position: static; font-size: 20px; }
+  .gh-nav {
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 6px;
+  }
+  .gh-sep { display: none; }
+  .gh-nav-item {
+    position: relative;
+    left: auto;
+    transform: none;
+    width: auto;
+    height: 44px;
+    padding: 0 4px 6px;
+    font-size: 13px;
+  }
+  .gh-active-ornament { width: 72%; height: 12px; top: auto; bottom: -4px; }
+  .gh-nav-item { padding-top: 0; }
+  .gh-actions { grid-area: actions; display: flex; align-items: center; gap: 12px; }
+  .gh-icon { position: static; width: 36px; height: 36px; padding: 7px; }
+  .gh-icon-sep { position: static; height: 20px; }
+
+  .ov-stage {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    padding: 40px 16px 48px;
+    background:
+      linear-gradient(180deg, rgba(17, 15, 13, 0.55), rgba(17, 15, 13, 0.82) 55%, #141210),
+      url('./assets/hall/great-hall.webp') 50% 0 / cover no-repeat;
+  }
+  .ov-camera,
+  .ov-rods,
+  .ov-band { display: none; }
+  .ov-stage > :where(:not(.ov-dust)),
+  .ov-intro > *,
+  .ov-stats > *,
+  .ov-banner-slot { position: static; }
+  .ov-intro,
+  .ov-banners,
+  .ov-stats { width: 100%; height: auto; }
+
+  .ov-intro { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .ov-eyebrow { font-size: 15px; }
+  .ov-title { width: min(408px, 92%); margin-top: 6px; }
+  .ov-intro .ov-divider { width: min(312px, 80%); margin: 10px 0 18px; }
+  .ov-intro .ov-divider svg { width: 13px; height: 13px; }
+  .ov-lede { width: auto; font-size: 15px; line-height: 1.75; white-space: normal; }
+  .ov-guide-btn,
+  .ov-stats-btn {
+    width: auto;
+    height: 44px;
+    margin-top: 22px;
+    padding: 0 22px;
+    gap: 8px;
+    font-size: 14px;
+    border-width: 12px;
+  }
+
+  .ov-ranking { position: relative; left: auto; top: auto; width: min(403px, 100%); }
+
+  .ov-banners {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 960px;
+  }
+  .ov-banner-slot { width: auto; }
+
+  .ov-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 16px;
+    max-width: 960px;
+    padding: 22px 0;
+    border-block: 1px solid var(--gh-brass-line);
+    background: rgba(20, 18, 16, 0.7);
+  }
+  .ov-stat {
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    padding: 0 12px;
+  }
+  .ov-stat + .ov-stat::before { display: none; }
+  .ov-stat-icon { width: 28px; height: 28px; }
+  .ov-stats-btn { margin-left: 0; }
+  .ov-stat-label { font-size: 13px; }
+  .ov-stat-value { font-size: 18px; }
+  .ov-stats-btn { grid-column: 1 / -1; justify-self: center; margin-top: 4px; }
+
+  .ov-scroll { display: none; }
+}
+
+@media (max-width: 899px) {
+  .gh-icon-sep { display: none; }
+}
+
+@media (max-width: 700px) {
+  .ov-banners { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 480px; gap: 16px 12px; }
+  .ov-stats { grid-template-columns: 1fr; max-width: 480px; }
+  .ov-stat { padding: 0 16px; }
+}
+
+@media (max-width: 420px) {
+  .gh-wordmark { font-size: 17px; }
+  .gh-nav-long { display: none; }
+  .gh-nav-short { display: inline; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ov-rays span,
+  .ov-banner { animation: none; }
+  .ov-dust { display: none; }
+  .ov-banner,
+  .ov-guide-btn,
+  .ov-stats-btn { transition: none; }
+}

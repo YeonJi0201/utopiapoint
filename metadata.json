@@ -1,0 +1,6 @@
+{
+  "name": "호그와트 기숙사 우승컵 - 자캐 커뮤니티 점수 보드",
+  "description": "해리포터 기반 자캐 커뮤니티를 위한 호그와트 기숙사 우승컵 실시간 점수 현황, 캐릭터별 활동 상세 기록 및 관리자 점수 수여 시스템",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
